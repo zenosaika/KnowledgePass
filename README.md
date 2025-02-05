@@ -17,10 +17,10 @@ cd KPBackend
 uvicorn main:app --reload --port 8081
 ```
 
-### 3. Run Django on local
+### 4. Run Django on local
 ```
 cd KPFrontend
 python manage.py runserver
 ```
 
-### 4. Go to [http://127.0.0.1:8000](http://127.0.0.1:8000)
+### 5. Go to [http://127.0.0.1:8000](http://127.0.0.1:8000)
