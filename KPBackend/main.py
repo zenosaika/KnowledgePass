@@ -45,6 +45,9 @@ def get_sankey_data(paths):
 
 @app.get("/search")
 async def search_jobs(q: Optional[str] = Query(None, description="Job title to retrieve")):
+    if not q:
+        return {"message": "No query provided"}
+
     obj = SibylSystem.inference(q)
 
     results = {}
@@ -82,17 +85,7 @@ async def search_jobs(q: Optional[str] = Query(None, description="Job title to r
 
     sankey_data = get_sankey_data(obj['data'])
 
-    if q:
-        return {'html': [html_result], 'sankey_data': sankey_data}
-    else:
-        return {"message": "No query provided"}
-    
-# @app.get("/search")
-# async def search_jobs(q: Optional[str] = Query(None, description="Job title to retrieve")):
-#     if q:
-#         return {q: SibylSystem.inference(q)}
-#     else:
-#         return {"message": "No query provided"}
+    return {'html': [html_result], 'sankey_data': sankey_data}
     
 @app.get("/compile_graph")
 async def search_jobs():

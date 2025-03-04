@@ -15,7 +15,7 @@ load_dotenv()
 
 
 # Gemini API
-# genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 generation_config = {
   "temperature": 1,
@@ -314,55 +314,6 @@ def _get_all_required_skills(tx, job_name):
   )
   result = tx.run(query, job_name=job_name)
   return [record['skill']['name'] for record in result]
-
-
-# def inference(job_name):
-#     paths = find_course_job_paths(job_name)
-#     paths2 = find_course_job_paths2(job_name)
-
-#     results = {}
-#     required_skills_checklist = {k:False for k in get_all_required_skills(job_name)}
-
-#     to_be_print = []
-
-#     if paths:
-#         for path in paths:
-#             course_name, description, skill2 = describe_course_job_path(path)
-#             if course_name in results:
-#                 results[course_name].append(description)
-#             else:
-#                 results[course_name] = [description]
-
-#             required_skills_checklist[skill2] = True
-
-#     if paths2:
-#         for path in paths2:
-#             course_name, description, skill1 = describe_course_job_path2(path)
-#             if course_name in results:
-#                 results[course_name].append(description)
-#             else:
-#                 results[course_name] = [description]
-
-#             required_skills_checklist[skill1] = True
-
-#     to_be_print.append(f'<b style="font-size:large;">ผลการวิเคราะห์งาน</b>')
-#     to_be_print.append(f'<h2 style="color:rgb(116,238,21);">{job_name}</h2>')
-#     to_be_print.append(f'<b style="font-size:large;">ต้องการ Skills ที่เรียนได้จากวิชาดังต่อไปนี้ :</b><br>')
-
-#     for k, v in results.items():
-#         to_be_print.append(f'💠 <b>{k}</b>')
-#         to_be_print.append('<details><summary>ดูคำอธิบาย</summary>')
-#         for item in v:
-#             to_be_print.append(f'&nbsp;&nbsp;&nbsp;&nbsp;- {item}')
-#         to_be_print.append('</details>')
-
-#     to_be_print.append('<br><b style="font-size:large;">ความเกี่ยวข้องกับวิชาที่มีสอนในสาขา Soft-EN 💻 :</b><br>')
-#     for k, v in required_skills_checklist.items():
-#         to_be_print.append(f"&nbsp;&nbsp;&nbsp;&nbsp;{'🟩' if v else '⬛'}&nbsp;&nbsp;&nbsp;&nbsp;{'<b>' + k.title() + '</b>' if v else k.title()}")
-
-#     html_result = '<br>'.join(to_be_print)
-
-#     return html_result
 
 
 def inference(job_name):
